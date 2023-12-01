@@ -96,3 +96,10 @@ sum(rowSums(is.na(planets_t)) > 0) %>%
   knitr::kable(caption = "Number of observations with at least one missing value", format = "markdown", align = 'c') 
 
 ```
+
+## Question 5
+
+```{r Grapphical_representation_radius_by_density}
+planets_t %>% ggplot(aes(x=`DENSITY (EARTH)`,y=Radius)) + geom_point() +
+  labs(title = "Radius by density",x = "Density", y = "Radius") + theme_dark()
+```
