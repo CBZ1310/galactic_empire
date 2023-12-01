@@ -4,6 +4,16 @@ format: html
 editor: visual
 ---
 
+<center>
+
+## Github Link : 
+
+<https://github.com/CBZ1310/galactic_empire>
+
+</center>
+
+<br>
+
 ## Setup
 
 ```{r}
