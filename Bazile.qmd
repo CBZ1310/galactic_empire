@@ -151,3 +151,13 @@ Terr_stat %>% ggplot(aes(x = as.factor(planet_idx), y = N_Terr))  + geom_col() +
   labs(title = "Number of terrains by planet",x = "Planet", y = "Number of Climats") + theme_classic() 
 
 ```
+
+### Question 9
+
+```{r}
+planet_tc2 <- left_join(planets_t, CLIMATE, by = "planet_idx")
+
+planet_tc2 %>% ggplot(aes(x = as.factor(planet_idx), y = MASS))  + geom_bar(stat = "identity") +
+  labs(title = "Mass by planet and climate",x = "Planet", y = "Mass") + theme_classic() +  facet_wrap(~ Climate_v2, ncol = 2)
+
+```
