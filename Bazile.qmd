@@ -103,3 +103,19 @@ sum(rowSums(is.na(planets_t)) > 0) %>%
 planets_t %>% ggplot(aes(x=`DENSITY (EARTH)`,y=Radius)) + geom_point() +
   labs(title = "Radius by density",x = "Density", y = "Radius") + theme_dark()
 ```
+
+## Question 6
+
+```{r Extreme_values}
+#Star_number
+planets_t %>% arrange(Star_number) %>% slice_head()  %>% bind_rows(planets_t %>% arrange(desc(Star_number)) %>% slice_head()) %>% select(PLANET, Star_number) %>% 
+  knitr::kable(caption = "Extremums of Star Number", format = "markdown", align = 'c') 
+
+#Density
+planets_t %>% arrange(`DENSITY (EARTH)`) %>% slice_head()  %>% bind_rows(planets_t %>% arrange(desc(`DENSITY (EARTH)`)) %>% slice_head()) %>% select(PLANET, `DENSITY (EARTH)`) %>% 
+  knitr::kable(caption = "Extremums of density", format = "markdown", align = 'c') 
+
+#Radius
+planets_t %>% arrange(Radius) %>% slice_head()  %>% bind_rows(planets_t %>% arrange(desc(Radius)) %>% slice_head()) %>% select(PLANET, Radius) %>% 
+  knitr::kable(caption = "Extremums of Radius", format = "markdown", align = 'c') 
+```
