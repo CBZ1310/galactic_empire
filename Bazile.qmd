@@ -15,7 +15,7 @@ editor: visual
 
 <br>
 
-## Setup
+# Setup
 
 ```{r}
 here::i_am("galactic_empire.Rproj")
@@ -25,7 +25,10 @@ library(dplyr)
 library(tidyr)
 library(labelled)
 library(readr)
+library(stringr)
 ```
+
+# 1 Main data set import
 
 ## Question 3
 
@@ -118,4 +121,33 @@ planets_t %>% arrange(`DENSITY (EARTH)`) %>% slice_head()  %>% bind_rows(planets
 #Radius
 planets_t %>% arrange(Radius) %>% slice_head()  %>% bind_rows(planets_t %>% arrange(desc(Radius)) %>% slice_head()) %>% select(PLANET, Radius) %>% 
   knitr::kable(caption = "Extremums of Radius", format = "markdown", align = 'c') 
+```
+
+# Improved data representation
+
+## Question 7
+
+```{r}
+Extraction <- planets_t %>%
+  mutate(Terrain_v2 = str_split(TERRAIN, ", "), Climate_v2 = str_split(CLIMATE, ", ")) %>%
+  select(planet_idx, Terrain_v2, Climate_v2) %>%
+  unnest(Terrain_v2, .drop = TRUE) %>%
+  unnest(Climate_v2, .drop = TRUE)
+
+TERRAIN <- Extraction %>% select(planet_idx, Terrain_v2)
+CLIMATE <- Extraction %>% select(planet_idx, Climate_v2)
+```
+
+## Question 8
+
+```{r}
+Clim_stat <- CLIMATE %>% group_by(planet_idx) %>% summarise("N_Climate" = n(), .groups = 'drop')
+
+Clim_stat %>% ggplot(aes(x = as.factor(planet_idx), y = N_Climate)) + geom_col() + labs(title = "Number of Climates by Planet", x = "Planet", y = "Number of Climates") + theme_classic() 
+
+Terr_stat <- TERRAIN  %>%   group_by(planet_idx) %>% summarize("N_Terr" = n(), .groups = 'drop')
+
+Terr_stat %>% ggplot(aes(x = as.factor(planet_idx), y = N_Terr))  + geom_col() +
+  labs(title = "Number of terrains by planet",x = "Planet", y = "Number of Climats") + theme_classic() 
+
 ```
