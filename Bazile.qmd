@@ -1,5 +1,6 @@
 ---
 title: "Galactic Empire"
+author: "Cédric BAZILE"
 format: html
 editor: visual
 ---
@@ -23,4 +24,24 @@ library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(labelled)
+library(readr)
+```
+
+## Question 3
+
+```{r Importation_of_the_main_dataset}
+planets <- read_delim("Main_Dataset/planets.csv")
+names(planets) #I check again the name of each column
+
+```
+
+```{r Checking_the_number_of_Planets}
+test <- (planets %>% unique() %>% nrow())
+answer_to_test <- print(test == 988)
+```
+
+At the question, is there 988 rows (and therefore planet), the answer of our test is `r answer_to_test`
+
+```{r}
+planets %>%  select(where(is.numeric)) %>%   knitr::kable(caption = "List of numeric variable", format = "markdown", align = 'c')
 ```
