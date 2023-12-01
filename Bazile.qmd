@@ -100,12 +100,16 @@ sum(rowSums(is.na(planets_t)) > 0) %>%
 
 ```
 
+<br>
+
 ## Question 5
 
 ```{r Grapphical_representation_radius_by_density}
 planets_t %>% ggplot(aes(x=`DENSITY (EARTH)`,y=Radius)) + geom_point() +
   labs(title = "Radius by density",x = "Density", y = "Radius") + theme_dark()
 ```
+
+<br>
 
 ## Question 6
 
@@ -123,7 +127,11 @@ planets_t %>% arrange(Radius) %>% slice_head()  %>% bind_rows(planets_t %>% arra
   knitr::kable(caption = "Extremums of Radius", format = "markdown", align = 'c') 
 ```
 
+<br>
+
 # Improved data representation
+
+<br>
 
 ## Question 7
 
@@ -137,6 +145,8 @@ Extraction <- planets_t %>%
 TERRAIN <- Extraction %>% select(planet_idx, Terrain_v2)
 CLIMATE <- Extraction %>% select(planet_idx, Climate_v2)
 ```
+
+<br>
 
 ## Question 8
 
@@ -152,7 +162,9 @@ Terr_stat %>% ggplot(aes(x = as.factor(planet_idx), y = N_Terr))  + geom_col() +
 
 ```
 
-### Question 9
+<br>
+
+## Question 9
 
 ```{r}
 planet_tc2 <- left_join(planets_t, CLIMATE, by = "planet_idx")
@@ -161,3 +173,24 @@ planet_tc2 %>% ggplot(aes(x = as.factor(planet_idx), y = MASS))  + geom_bar(stat
   labs(title = "Mass by planet and climate",x = "Planet", y = "Mass") + theme_classic() +  facet_wrap(~ Climate_v2, ncol = 2)
 
 ```
+
+<br>
+
+## Question 10
+
+```{r Importation_of_the_main_dataset}
+stars <- read_delim("Main_Dataset/all+stars.csv")
+names(stars) #I check again the name of each column
+stars_t <- stars %>% as_tibble()
+```
+
+```{r Checking_if_all_the_numeric_values_are_recognized}
+c_names <- stars_t %>%  
+  select(where(is.numeric))%>%
+  names()  
+
+c_names %>%   
+  knitr::kable(caption = "List of numeric variable", format = "markdown", align = 'c') 
+```
+
+We have our expected numerical variables.
