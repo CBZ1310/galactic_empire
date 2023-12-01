@@ -32,7 +32,7 @@ library(readr)
 ```{r Importation_of_the_main_dataset}
 planets <- read_delim("Main_Dataset/planets.csv")
 names(planets) #I check again the name of each column
-
+planets_t <- planets %>% as_tibble()
 ```
 
 ```{r Checking_the_number_of_Planets}
@@ -40,8 +40,27 @@ test <- (planets %>% unique() %>% nrow())
 answer_to_test <- print(test == 988)
 ```
 
-At the question, is there 988 rows (and therefore planet), the answer of our test is `r answer_to_test`
+At the question, is there 988 rows (and therefore planet), the answer of our test is `r answer_to_test`. We have indeed `r test` rows on the expected 988.
 
-```{r}
-planets %>%  select(where(is.numeric)) %>%   knitr::kable(caption = "List of numeric variable", format = "markdown", align = 'c')
+```{r Checking_if_all_the_numeric_values_are_recognized}
+c_names <- planets %>%  
+  select(where(is.numeric))%>%
+  names()  
+
+c_names %>%   
+  knitr::kable(caption = "List of numeric variable", format = "markdown", align = 'c') 
+```
+
+By looking, the list of our data we observe that the "Radius" column was not recognized as a numeric value.
+
+```{r Transformation_of_the_radius_column}
+planets_t <- planets_t %>%
+  mutate(radius = as.numeric(radius))
+
+c_names_2 <- planets %>%  
+  select(where(is.numeric))%>%
+  names()  
+
+c_names %>%   
+  knitr::kable(caption = "List of numeric variable", format = "markdown", align = 'c') 
 ```
