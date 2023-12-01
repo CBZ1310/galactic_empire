@@ -1,0 +1,16 @@
+---
+title: "Galactic Empire"
+format: html
+editor: visual
+---
+
+## Setup
+
+```{r}
+here::i_am("galactic_empire.Rproj")
+library(here)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(labelled)
+```
