@@ -7,7 +7,7 @@ editor: visual
 
 <center>
 
-## Github Link : 
+## Github Link :
 
 <https://github.com/CBZ1310/galactic_empire>
 
@@ -178,13 +178,13 @@ planet_tc2 %>% ggplot(aes(x = as.factor(planet_idx), y = MASS))  + geom_bar(stat
 
 ## Question 10
 
-```{r Importation_of_the_main_dataset}
+```{r Importation_of_the_main_dataset_2}
 stars <- read_delim("Main_Dataset/all+stars.csv")
 names(stars) #I check again the name of each column
 stars_t <- stars %>% as_tibble()
 ```
 
-```{r Checking_if_all_the_numeric_values_are_recognized}
+```{r Checking_if_all_the_numeric_values_are_recognized_2}
 c_names <- stars_t %>%  
   select(where(is.numeric))%>%
   names()  
