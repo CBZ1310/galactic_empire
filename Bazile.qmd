@@ -194,3 +194,11 @@ c_names %>%
 ```
 
 We have our expected numerical variables.
+
+\## Question 12
+
+```{r}
+stars_t2 <- stars_t %>%
+  mutate(stellar_type = str_split(`stellar type`, ", ")) %>%
+  unnest(stellar_type, .drop = TRUE)
+```
